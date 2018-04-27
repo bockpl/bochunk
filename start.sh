@@ -10,7 +10,7 @@ done
 # Start the first process
 mfschunkserver start
 RESULT=$?
-if [[ ${RESULT} = 0 ]]; then
+if [[ ${RESULT} = "0" ]]; then
   echo "Failed to start mfschunkserver: $status"
   exit $status
 fi
