@@ -4,7 +4,12 @@ MOUNTPOINT=/mnt/mfs
 for DIR in $(grep "/.*" /etc/mfs/mfshdd.cfg); do
   # kasowanie wszystkich znakow przez sciezka
   DIR=$(echo $DIR|sed -e "s@.${MOUNTPOINT}@${MOUNTPOINT}@")
-  chown -R mfs:mfs $DIR
+  
+  # zmiana wlascicielstwa dla katalogow z chunkami
+  USER_GROUP = "mfs:mfs"
+  if [ $(stat -c %U:%G $DIR) != $USER_GROUP ]; then
+    chown -R $USER_GROUP $DIR
+  fi
 done
 
 # Start the first process
