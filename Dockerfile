@@ -6,7 +6,7 @@ MAINTAINER Seweryn Sitarski
 #ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -y update && apt-get -y install wget && \
 wget -O - http://ppa.moosefs.com/moosefs.key | apt-key add - && \
-echo "deb http://ppa.moosefs.com/moosefs-3/apt/ubuntu/xenial xenial main" > /etc/apt/sources.list.d/moosefs.list && \
+echo "deb http://ppa.moosefs.com/3.0.100/apt/ubuntu/xenial xenial main" > /etc/apt/sources.list.d/moosefs.list && \
 apt-get update && \
 apt-get -y install moosefs-pro-chunkserver xfsprogs 
 
