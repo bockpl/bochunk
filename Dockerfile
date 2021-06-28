@@ -1,21 +1,21 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 MAINTAINER Seweryn Sitarski
 
 # Instalacja klienta MFS
 # Nieinteraktywne apt
 #ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get -y update && apt-get -y install wget && \
-wget -O - http://ppa.moosefs.com/moosefs.key | apt-key add - && \
-echo "deb http://ppa.moosefs.com/3.0.112/apt/ubuntu/xenial xenial main" > /etc/apt/sources.list.d/moosefs.list && \
-apt-get update && \
-apt-get -y install moosefs-pro-chunkserver xfsprogs 
+RUN apt update && apt -y install wget && apt -y install gnupg && \
+wget -O - https://ppa.moosefs.com/moosefs.key | apt-key add - && \
+echo "deb [arch=amd64] http://ppa.moosefs.com/3.0.115/apt/ubuntu/focal focal main" > /etc/apt/sources.list.d/moosefs.list && \
+apt update && \
+apt -y install moosefs-pro-chunkserver xfsprogs 
 
 #RUN apt-get -y install lvm2 && sed -i 's/use_lvmetad = 1/use_lvmetad = 0/' /etc/lvm/lvm.conf
 
 # Czyszczenie apt-a
-RUN apt-get -y purge wget && \
-apt-get -y autoremove && \
-apt-get -y clean
+RUN apt -y purge wget && \
+apt -y autoremove && \
+apt -y clean
 
 ADD start.sh /
 
