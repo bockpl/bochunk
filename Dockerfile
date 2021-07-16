@@ -4,9 +4,9 @@ MAINTAINER Seweryn Sitarski
 # Instalacja klienta MFS
 # Nieinteraktywne apt
 #ENV DEBIAN_FRONTEND noninteractive
-RUN apt update && apt -y install wget && apt -y install gnupg && \
+RUN apt update && apt install apt-utils && apt -y install wget && apt -y install gnupg && \
 wget -O - https://ppa.moosefs.com/moosefs.key | apt-key add - && \
-echo "deb [arch=amd64] http://ppa.moosefs.com/3.0.115/apt/ubuntu/focal focal main" > /etc/apt/sources.list.d/moosefs.list && \
+echo "deb http://ppa.moosefs.com/4.32.0/apt/ubuntu/focal focal main" > /etc/apt/sources.list.d/moosefs.list && \
 apt update && \
 apt -y install moosefs-pro-chunkserver xfsprogs 
 
