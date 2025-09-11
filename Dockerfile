@@ -1,14 +1,18 @@
 FROM ubuntu:20.04
-MAINTAINER Seweryn Sitarski
+LABEL maintainer="Seweryn Sitarski"
+
+
 
 # Instalacja klienta MFS
 # Nieinteraktywne apt
 #ENV DEBIAN_FRONTEND noninteractive
-RUN apt update && apt install apt-utils && apt -y install wget && apt -y install gnupg && \
+RUN apt -y update && \
+apt-get -y upgrade && \
+apt-get -y install apt-utils wget gnupg && \
 wget -O - https://ppa.moosefs.com/moosefs.key | apt-key add - && \
 echo "deb http://ppa.moosefs.com/4.32.0/apt/ubuntu/focal focal main" > /etc/apt/sources.list.d/moosefs.list && \
-apt update && \
-apt -y install moosefs-pro-chunkserver xfsprogs 
+apt-get -y update && \
+apt-get -y install moosefs-pro-chunkserver xfsprogs isc-dhcp-client iproute2
 
 #RUN apt-get -y install lvm2 && sed -i 's/use_lvmetad = 1/use_lvmetad = 0/' /etc/lvm/lvm.conf
 
